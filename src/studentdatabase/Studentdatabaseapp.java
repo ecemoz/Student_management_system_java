@@ -16,7 +16,7 @@ public class Studentdatabaseapp {
 		System.out.println("Ecem Nur Özen Apps TM A.Ş. LTD ŞTİ");
 	student stu1 = new student();
 	stu1.enroll();
-	stu1.payTuition(600);
+	stu1.payTuition();
 	stu1.viewBalance();
 	}
 
