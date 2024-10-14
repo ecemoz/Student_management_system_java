@@ -1,0 +1,109 @@
+package studentdatabase;
+
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.util.Scanner;
+
+public class student {
+
+
+	private String firstName;
+	private String lastName;
+	private int gradeInt;
+	private String gradeYear;
+	private String studentID;
+	private String courses = "";
+	private int tuitionBalance = 0;
+	private static int costOfCourse = 600;
+	private static int id= 1000;
+	
+	public student ()
+	{
+		Scanner in = new Scanner(System.in);
+		System.out.print("Enter student first name ");
+		this.firstName=in.nextLine();
+		
+		System.out.print("Enter student last name ");
+		this.lastName= in.nextLine();
+		
+		System.out.print("0-Hazırlık\n1-1.sınıf\n2-2.sınıf\n3-3.sınıf\n4-4.sınıf\nEnter student class level: ");
+		this.gradeInt= in.nextInt();
+		
+		if(gradeInt == 0) {
+			gradeYear = "Hazırlık";
+		}else if (gradeInt==1) {
+			gradeYear = "1. Sınıf";
+		}else if (gradeInt==2) {
+			gradeYear = "2. Sınıf";
+		}else if (gradeInt==3) {
+			gradeYear = "3. Sınıf";
+		}else if (gradeInt==4) {
+			gradeYear = "4. Sınıf";
+		}
+		
+		setStudentID();
+		System.out.println(firstName+" "+lastName+" "+gradeYear+" "+studentID);
+	}
+		
+		
+		private void setStudentID() {
+			id++;
+			this.studentID= gradeInt+""+ id;
+		}
+
+		public void enroll() {
+			
+		do {	
+			System.out.print("Enter course to enroll ( Q to quit): ");
+			Scanner in= new Scanner(System.in);
+			String course = in.nextLine();
+			if(!course.equals("Q")) {
+				courses += course +"\n";
+				tuitionBalance = tuitionBalance + costOfCourse; 
+					}
+			else {break;}
+		}while (1!=0);
+			
+			System.out.println("ENROLLED IN:"+ courses);
+			System.out.println("TUITION BALANCE:"+ tuitionBalance);
+		}	
+			
+	public void viewBalance() {
+				System.out.println("Your balance is: $"+ tuitionBalance);
+			}
+		 
+	public void payTuition() {
+		System.out.println("Enter your payment: $");
+		Scanner in= new Scanner(System.in);
+		int payment = in.nextInt();
+		tuitionBalance= tuitionBalance - payment;
+		System.out.println("Thank you for your payment of $"+payment);
+		viewBalance();
+			
+			}
+		
+		
+	
+		
+		
+		
+
+
+			
+		}
+
+
+
+
+
+
+
+
+
+		
+		
+			
+		
+
+
+
