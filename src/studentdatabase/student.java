@@ -42,7 +42,7 @@ public class student {
 		}
 		
 		setStudentID();
-		System.out.println(firstName+" "+lastName+" "+gradeYear+" "+studentID);
+	
 	}
 		
 		
@@ -51,37 +51,57 @@ public class student {
 			this.studentID= gradeInt+""+ id;
 		}
 
+		public void viewBalance() {
+			System.out.println("Dersleri almak için ödenmesi gereken miktar: $"+ tuitionBalance);
+		}
+		
+		public void checkPayment() {
+		    System.out.println("Kaç ders almak istediğinizi girin.");
+		    Scanner in = new Scanner(System.in);
+		    int numberOfCourse = in.nextInt();
+		    tuitionBalance = numberOfCourse * costOfCourse;
+		    viewBalance();
+		    
+		    System.out.println("Bütçenizi girin.");
+		    int budget = in.nextInt();
+		    tuitionBalance = tuitionBalance - budget;
+		    
+		    if (tuitionBalance <= 0) {
+		        System.out.println("Kayıt başarılı. Ders seçimine geçebilirsiniz.");
+		        enroll();  // Ders seçimine geçiliyor
+		    } else {
+		        System.out.println("Ödeme yetersiz. Kayıt başarısız.");
+		    }
+		}
+
 		public void enroll() {
-			
-		do {	
-			System.out.print("Enter course to enroll ( Q to quit): ");
-			Scanner in= new Scanner(System.in);
-			String course = in.nextLine();
-			if(!course.equals("Q")) {
-				courses += course +"\n";
-				tuitionBalance = tuitionBalance + costOfCourse; 
-					}
-			else {break;}
-		}while (1!=0);
-			
-			System.out.println("ENROLLED IN: \n"+ courses);
-			System.out.println("TUITION BALANCE:"+ tuitionBalance);
-		}	
-			
-	public void viewBalance() {
-				System.out.println("Your balance is: $"+ tuitionBalance);
-			}
-		 
-	public void payTuition() {
-		viewBalance();
-		System.out.println("Enter your payment: $");
-		Scanner in= new Scanner(System.in);
-		int payment = in.nextInt();
-		tuitionBalance= tuitionBalance - payment;
-		System.out.println("Thank you for your payment of $"+payment);
-		viewBalance();
-			
-			}
+		    do {    
+		        System.out.print("Enter course to enroll (Q to quit): ");
+		        Scanner in = new Scanner(System.in);
+		        String course = in.nextLine();
+		        if (!course.equals("Q")) {
+		            courses += course + "\n";
+		        } else {
+		            break;
+		        }
+		    } while (true);  // 1!=0 yerine true kullanımı daha anlaşılır
+		        
+		    System.out.println("ENROLLED IN: \n" + courses);
+		}
+
+		
+		
+		
+		
+	
+	public String showInfo() {
+		return "\n\n\nName:" +firstName+ " " +lastName +
+				"\nGrade Level: "+ gradeYear+
+				"\nStudent ID: "+ studentID+
+				"\nEnrolled Courses: \n"+ courses +
+				"\nTuition Balance $" + tuitionBalance;		
+	}
+	
 		
 		
 	
