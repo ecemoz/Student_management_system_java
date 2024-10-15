@@ -16,29 +16,32 @@ public class student {
 	private int tuitionBalance = 0;
 	private static int costOfCourse = 600;
 	private static int id= 1000;
+	private int numberOfCourse;
+	private int budget;
 	
 	public student ()
 	{
+		System.out.println("ENROLL NEW STUDENT");
 		Scanner in = new Scanner(System.in);
-		System.out.print("Enter student first name ");
+		System.out.print("Enter student first name: ");
 		this.firstName=in.nextLine();
 		
-		System.out.print("Enter student last name ");
+		System.out.print("Enter student last name: ");
 		this.lastName= in.nextLine();
 		
-		System.out.print("0-Hazırlık\n1-1.sınıf\n2-2.sınıf\n3-3.sınıf\n4-4.sınıf\nEnter student class level: ");
+		System.out.print("Press 0 for Prep \n Press 1 for Freshman-\n Press 2 for Sophmore \n Press 3 for Junior\n Press 4 for Senior\n Enter student class level: ");
 		this.gradeInt= in.nextInt();
 		
 		if(gradeInt == 0) {
-			gradeYear = "Hazırlık";
+			gradeYear = " Prep";
 		}else if (gradeInt==1) {
-			gradeYear = "1. Sınıf";
+			gradeYear = "Freshman";
 		}else if (gradeInt==2) {
-			gradeYear = "2. Sınıf";
+			gradeYear = "Sophmore";
 		}else if (gradeInt==3) {
-			gradeYear = "3. Sınıf";
+			gradeYear = "Junior";
 		}else if (gradeInt==4) {
-			gradeYear = "4. Sınıf";
+			gradeYear = "Senior";
 		}
 		
 		setStudentID();
@@ -52,54 +55,58 @@ public class student {
 		}
 
 		public void viewBalance() {
-			System.out.println("Dersleri almak için ödenmesi gereken miktar: $"+ tuitionBalance);
+			System.out.println("The amount to be paid for enrolling in courses: $"+ tuitionBalance);
 		}
 		
 		public void checkPayment() {
-		    System.out.println("Kaç ders almak istediğinizi girin.");
+		    System.out.println("Enter how many courses you want to enroll.");
 		    Scanner in = new Scanner(System.in);
-		    int numberOfCourse = in.nextInt();
+		    numberOfCourse = in.nextInt();
 		    tuitionBalance = numberOfCourse * costOfCourse;
 		    viewBalance();
 		    
-		    System.out.println("Bütçenizi girin.");
-		    int budget = in.nextInt();
+		    System.out.println("Enter your budget.");
+		    budget = in.nextInt();
 		    tuitionBalance = tuitionBalance - budget;
+		    budget = -tuitionBalance;
+		   
 		    
 		    if (tuitionBalance <= 0) {
-		        System.out.println("Kayıt başarılı. Ders seçimine geçebilirsiniz.");
-		        enroll();  // Ders seçimine geçiliyor
+		        System.out.println("Entered amount is enough. You can continue enrolling your courses.");
+		        enroll(); 
 		    } else {
-		        System.out.println("Ödeme yetersiz. Kayıt başarısız.");
-		    }
+		        System.out.println("Entered amount isn't enough. You can't enroll.");
+		    } 
 		}
 
 		public void enroll() {
-		    do {    
-		        System.out.print("Enter course to enroll (Q to quit): ");
+			int i=0;
+		    do {   
+		    	
+		    	if(i>= numberOfCourse) {
+		    		System.out.println("Courses are successfully enrolled.");
+		    		break;
+		    	}
+		        System.out.print("Enter course to enroll: ");
 		        Scanner in = new Scanner(System.in);
 		        String course = in.nextLine();
-		        if (!course.equals("Q")) {
-		            courses += course + "\n";
-		        } else {
-		            break;
-		        }
-		    } while (true);  // 1!=0 yerine true kullanımı daha anlaşılır
+		        courses += "--" + course + "\n";
+	            i++;
+	            
+		    } while (true); 
 		        
-		    System.out.println("ENROLLED IN: \n" + courses);
+		    //System.out.println("ENROLLED IN: \n" + courses);
 		}
 
 		
 		
 		
-		
-	
 	public String showInfo() {
-		return "\n\n\nName:" +firstName+ " " +lastName +
+		return "\n\n*************************"+"\nName:" +firstName+ " " +lastName +
 				"\nGrade Level: "+ gradeYear+
 				"\nStudent ID: "+ studentID+
 				"\nEnrolled Courses: \n"+ courses +
-				"\nTuition Balance $" + tuitionBalance;		
+				"Budget: $" + budget;		
 	}
 	
 		

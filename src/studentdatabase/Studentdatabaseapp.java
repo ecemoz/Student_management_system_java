@@ -1,5 +1,7 @@
 package studentdatabase;
 
+import java.util.Scanner;
+
 public class Studentdatabaseapp {
 
 	public static void main(String[] args) {
@@ -14,9 +16,24 @@ public class Studentdatabaseapp {
 				+ " ,,;;,;;;,;;;,;;;,;;;,;;;,;;;,;;,;;;,;;;,;;,,\r\n"
 				+ ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
 		System.out.println("Ecem Nur Özen Apps TM A.Ş. LTD ŞTİ");
-	student stu1 = new student();
-	stu1.checkPayment();
-	System.out.println(stu1.showInfo());
+		System.out.print("Enter of new students to enroll:");
+		Scanner in =new Scanner(System.in);
+		int numOfStudents= in.nextInt();
+		student[] students =new student[numOfStudents];
+		
+		for (int n = 0; n < numOfStudents; n++) {
+			students [n] = new student ();
+			students[n].checkPayment();
+			
+		}
+		for (int n = 0; n < numOfStudents; n++) {
+			System.out.println(students[n].showInfo());
+		}
+		
+		
+		
+		
+	
 	}
 
 }
